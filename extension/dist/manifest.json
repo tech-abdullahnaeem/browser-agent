@@ -1,0 +1,59 @@
+{
+  "manifest_version": 3,
+  "name": "Browser Agent",
+  "version": "0.3.0",
+  "description": "AI-powered browser automation agent with CMD+K command palette",
+
+  "permissions": [
+    "activeTab",
+    "sidePanel",
+    "storage",
+    "tabs"
+  ],
+
+  "host_permissions": [
+    "http://localhost:8000/*"
+  ],
+
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "side_panel": {
+    "default_path": "src/sidepanel/index.html"
+  },
+
+  "action": {
+    "default_popup": "src/popup/index.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+
+  "commands": {
+    "toggle-palette": {
+      "suggested_key": {
+        "default": "Ctrl+K",
+        "mac": "Command+K"
+      },
+      "description": "Open command palette"
+    }
+  },
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
